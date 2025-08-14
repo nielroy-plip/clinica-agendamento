@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "AdmTeste@123"  # Senha do admin (obrigatório usar caractere especial)
+      ACCEPT_EULA: "Y"             # Aceitar os termos da Microsoft
+    ports:
+      - "1433:1433"               # Porta padrão do SQL Server
+    volumes:
+      - sqlserver_data:/var/opt/mssql   # Persistência dos dados
+
+volumes:
+  sqlserver_data:

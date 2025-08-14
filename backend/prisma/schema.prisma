@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+// modelo de usuários do sistema
+model User {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(100)
+  email     String   @unique @db.VarChar(100)
+  senha     String   @db.VarChar(255)
+  telefone  String?  @db.VarChar(20)
+  role      String   @default("RECEPCIONISTA") @db.VarChar(50)
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relacionamentos
+  agendamentos     Appointment[]  @relation("DentistaAgendamentos")
+  horariosTrabalho WorkingHours[]
+
+  @@map("users")
+}
+
+// modelo de pacientes
+model Patient {
+  id             Int       @id @default(autoincrement())
+  nome           String    @db.VarChar(100)
+  cpf            String?   @unique @db.VarChar(14)
+  telefone       String    @db.VarChar(20)
+  email          String?   @db.VarChar(100)
+  dataNascimento DateTime?
+  endereco       String?   @db.VarChar(200)
+  observacoes    String?   @db.Text
+  ativo          Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // relacionamentos
+  agendamentos Appointment[]
+
+  @@map("patients")
+}
+
+// modelo de procedimentos
+model Procedure {
+  id        Int      @id @default(autoincrement())
+  nome      String   @db.VarChar(200)
+  descricao String?  @db.Text
+  duracao   Int // duração em minutos
+  valor     Decimal? @db.Decimal(10, 2)
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // relacionamentos
+  agendamentos Appointment[]
+
+  @@map("procedures")
+}
+
+// modelo principal de agendamentos
+model Appointment {
+  id          Int      @id @default(autoincrement())
+  dataHora    DateTime // data e hora do agendamento
+  status      String   @default("AGENDADO") @db.VarChar(50)
+  observacoes String?  @db.Text
+  valor       Decimal? @db.Decimal(10, 2)
+
+  // chaves estrangeiras
+  pacienteId     Int
+  dentistaId     Int
+  procedimentoId Int
+
+  // relacionamentos
+  paciente     Patient   @relation(fields: [pacienteId], references: [id])
+  dentista     User      @relation("DentistaAgendamentos", fields: [dentistaId], references: [id])
+  procedimento Procedure @relation(fields: [procedimentoId], references: [id])
+
+  // timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("appointments")
+}
+
+// modelo para horários de funcionamento
+model WorkingHours {
+  id         Int     @id @default(autoincrement())
+  diaSemana  Int // 0 = domingo, 1 = segunda, etc.
+  horaInicio String  @db.VarChar(5) // formato "08:00"
+  horaFim    String  @db.VarChar(5) // formato "18:00"
+  ativo      Boolean @default(true)
+  dentistaId Int? // null = para toda clínica
+
+  // relacionamento opcional com dentista específico
+  dentista User? @relation(fields: [dentistaId], references: [id], onDelete: Cascade)
+
+  @@map("working_hours")
+}

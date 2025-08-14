@@ -1,0 +1,26 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[Appointment] (
+    [id] INT NOT NULL IDENTITY(1,1),
+    [paciente] VARCHAR(100) NOT NULL,
+    [data] DATETIME2 NOT NULL,
+    [procedimento] VARCHAR(200) NOT NULL,
+    [createdAt] DATETIME2 NOT NULL CONSTRAINT [Appointment_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT [Appointment_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH
