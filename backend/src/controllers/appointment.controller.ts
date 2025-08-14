@@ -76,36 +76,35 @@ export const getAppointments = async (req: Request, res: Response) => {
 };
 
 export const getAppointmentById = async (req: Request, res: Response) => {
+  console.log('Params:', req.params);
+  const id = Number(req.params.id);
+  console.log('ID convertido:', id);
+
+  if (isNaN(id)) {
+    return res.status(400).json({ 
+      status: 'fail', 
+      message: 'ID inválido' });
+  }
+
   try {
-    const id = Number(req.params.id);
+    const appointment = await getAppointmentByIdService(id);
+    console.log('Appointment encontrado:', appointment); 
 
-    if (isNaN(id)) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'ID inválido'
-      });
-    }
-  
-  const appointment = await getAppointmentByIdService(id);
-    
     if (!appointment) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Agendamento não encontrado'
-      });
+      return res.status(404).json({ 
+        status: 'fail', 
+        message: 'Agendamento não encontrado' });
     }
 
-    res.status(200).json({
-      status: 'success',
-      data: appointment
-    });
+    res.status(200).json({ 
+      status: 'success', 
+      data: appointment });
   } catch (error) {
     console.error('Erro ao buscar agendamento:', error);
-    res.status(500).json({
-      status: 'error',
-      message: 'Erro ao buscar agendamento'
-      });
-    }
+    res.status(500).json({ 
+      status: 'error', 
+      message: 'Erro ao buscar agendamento' });
+  }
 };
 
 export const updateAppointment = async (req: Request, res: Response) => {

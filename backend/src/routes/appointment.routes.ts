@@ -28,7 +28,7 @@ router.post('/', validate(appointmentSchema, 'body'), createAppointment);
 router.get('/', validate(appointmentQuerySchema, 'query'), getAppointments);
 
 //rota para buscar agendamento específico por ID
-router.get('/api/appointments/:id', getAppointmentById);
+router.get('/:id', getAppointmentById);
 
 //rota para atualizar agendamento completo
 router.put('/:id', validate(updateAppointmentSchema, 'body'), updateAppointment);
@@ -42,10 +42,10 @@ router.delete('/:id', deleteAppointment);
 // ROTAS DE FILTRO ESPECÍFICOS
 
 //buscat agendamentos por paciente
-router.get('/:patientId', getAppointmentsByPatient);
+router.get('/patient/:patientId', getAppointmentsByPatient);
 
 //buscar agendamentos por data específica
-router.get('/:date', getAppointmentsByDate);
+router.get('/date/:date', getAppointmentsByDate);
 
 //middleware de validação
 router.post('/', validate(appointmentSchemaType, 'body'), createAppointment)

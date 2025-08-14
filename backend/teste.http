@@ -11,7 +11,7 @@ POST {{baseUrl}}/api/appointments
 Content-Type: {{contentType}}
 
 {
-  "id": "1",
+  "id": 1,
   "paciente": "Lucas Freitas",
   "data": "2025-08-14T09:00:00",
   "procedimento": "Limpeza dental"
@@ -22,7 +22,7 @@ GET {{baseUrl}}/api/appointments
 
 ### Buscar agendamentos por ID
 # @name createAppointment
-@appointmentId = {{createAppointment.body.id}}
+@appointmentId = {{createAppointment.response.body.id}}
 GET {{baseUrl}}/api/appoinments/{{appointmentId}}
 
 ### Atualizar agendamento
@@ -30,6 +30,7 @@ PUT {{baseUrl}}/api/appointments/{{appointmentId}}
 Content-Type: {{contentType}}
 
 {
+  "id": "1",
   "procedimento": "Limpeza dental + aplicação de flúor"
 }
 
