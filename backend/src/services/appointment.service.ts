@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
+import { AppointmentInput } from '../types/appointment';
 
+export const createAppointmentInput = async ( data: AppointmentInput[]) => {};
 
 const prisma = new PrismaClient();
 

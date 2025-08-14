@@ -17,6 +17,7 @@ import {
   updateAppointmentSchema,
   appointmentStatusSchema} from '../validations/appointment.schema';
 import { appointmentQuerySchema } from '../validations/appointment.schema';
+import { appointmentSchemaType } from '../types/appointment'
 
 const router = Router();
 
@@ -45,5 +46,8 @@ router.get('/patient/:patientId', getAppointmentsByPatient);
 
 //buscar agendamentos por data específica
 router.get('/data/:date', getAppointmentsByDate);
+
+//middleware de validação
+router.post('/', validate(appointmentSchemaType, 'body'), createAppointment)
 
 export default router;

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodSchema } from 'zod';
+import { appointmentSchemaType } from '../types/appointment';
 
 export const validate = 
   (schema: ZodSchema, type: 'body' | 'params' | 'query' ) => 

@@ -1,0 +1,35 @@
+### Variáveis
+@baseUrl = http://localhost:3001
+@contentType = application/json
+
+### Health check
+# @name healthCheck
+GET {{baseUrl}}/health
+
+### Criar agendamento
+POST {{baseUrl}}/api/appointments
+Content-Type: {{contentType}}
+
+{
+  "paciente": "Lucas Freitas",
+  "data": "2025-08-14T09:00:00",
+  "procedimento": "Limpeza dental"
+}
+
+### Listar agendamentos
+GET {{baseUrl}}/api/appointments
+
+### Buscar agendamentos por ID
+@appointmentId = {{createAppointment_response.body.id}}
+GET {{baseUrl}}/api/appoinments/{{appointmentId}}
+
+### Atualizar agendamento
+PUT {{baseUrl}}/api/appointments/{{appointmentId}}
+Content-Type: {{contentType}}
+
+{
+  "procedimento": "Limpeza dental + aplicação de flúor"
+}
+
+### Deletar agendamento
+DELETE {{baseUrl}}/api/appointments/{{appointmentId}}

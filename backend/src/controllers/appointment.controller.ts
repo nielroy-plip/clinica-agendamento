@@ -10,6 +10,11 @@ import {
   getAppointmentsByDate as getAppointmentsByDateService,
   updateAppointmentStatus as updateAppointmentStatusService
 } from '../services/appointment.service';
+import { AppointmentInput } from '../types/appointment'
+
+export const create = async (req: Request, res: Response) => {
+  const { body } = req as { body: AppointmentInput[] };
+};
 
 export const createAppointment = async (req: Request, res: Response) => {
   try {
