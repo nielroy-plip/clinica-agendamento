@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Dentst, Patient} from '../models';
+import { Dentist, Patient} from '../models';
 
 export const loginDentis = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -12,7 +12,6 @@ export const loginDentis = async (req: Request, res: Response) => {
   if (!isMatch) return res.status(401).json({ error: 'Senha incorreta'});
 
   const token = jwt.sign({ id: dentist.id}, 'SEGREDO_SUPER_SECRETO', { expiresIn: '1h'});
-
   res.json({ token, user: { id: dentist.id, name: dentist.name} });
 };
 
@@ -26,6 +25,5 @@ export const loginPatient = async (req: Request, res: Response) => {
   if (!isMatch) return res.status(401).json({ error: 'Senha incorreta'});
 
   const token = jwt.sign({ id: patient.id}, 'SEGREDO_SUPER_SECRETO', { expiresIn: '1h'});
-
   res.json({ token, user: { id: patient.id, name: patient.name} });
 };
