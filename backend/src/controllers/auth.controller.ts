@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Dentist, Patient} from '../models';
+import { Dentist, Patient} from '../models/index';
 
-export const loginDentis = async (req: Request, res: Response) => {
+export const loginDentist = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   const dentist = await findDentistByEmail(email);

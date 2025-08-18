@@ -1,4 +1,4 @@
-import { Reqquest, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 declare global {
@@ -14,7 +14,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   if (!token) return res.status(401).send('Acesso negado');
 
   try {
-    const decoded = jwt.verify(token, 'SEGREDO_SUPER_SECRETO');
+    const decoded = jwt.verify(token, 'SEGREDO_SUPER_SECRETO') as { id: number };
     req.user = decoded;
     next();
   } catch (error) {

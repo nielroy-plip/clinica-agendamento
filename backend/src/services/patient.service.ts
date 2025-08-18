@@ -1,3 +1,5 @@
+import { Patient } from '../models/patient.model';
+
 export const findPatientByEmail = async ( email: string ) => {
-  retunr await Patinet.findOne({ where: { email }});
+  return await Patient.findOne({ where: { email }});
 };
