@@ -8,7 +8,7 @@ datasource db {
 }
 
 // modelo de usuários do sistema
-model User {
+model Dentist {
   id        Int      @id @default(autoincrement())
   nome      String   @db.VarChar(100)
   email     String   @unique @db.VarChar(100)
@@ -79,7 +79,7 @@ model Appointment {
 
   // relacionamentos
   paciente     Patient   @relation(fields: [pacienteId], references: [id])
-  dentista     User      @relation("DentistaAgendamentos", fields: [dentistaId], references: [id])
+  dentista     Dentist      @relation("DentistaAgendamentos", fields: [dentistaId], references: [id])
   procedimento Procedure @relation(fields: [procedimentoId], references: [id])
 
   // timestamps
@@ -99,7 +99,7 @@ model WorkingHours {
   dentistaId Int? // null = para toda clínica
 
   // relacionamento opcional com dentista específico
-  dentista User? @relation(fields: [dentistaId], references: [id], onDelete: Cascade)
+  dentista Dentist? @relation(fields: [dentistaId], references: [id], onDelete: Cascade)
 
   @@map("working_hours")
 }

@@ -3,6 +3,7 @@ import cors from 'cors';
 import { PrismaClient } from '@prisma/client'
 import appointmentRouter from './routes/appointment.routes';
 import { errorHandler } from './middlewares/errorHandler';
+import authRoutes  from './routes/auth.routes';
 
 const prisma = new PrismaClient({
   log: ['query', 'info', 'warn', 'error']
@@ -67,6 +68,8 @@ app.get('/health', async (req: Request, res: Response) => {
     });
   }
 });
+
+app.use('/api', authRoutes); 
 
 // Rota POST temporária
 app.post('/api/appointments', (req, res) => {

@@ -12,7 +12,7 @@ export const loginDentist = async (req: Request, res: Response) => {
         const dentist = await prisma.dentist.findUnique({ where: { email } });
         if (!dentist) return res.status(404).json({ error: 'Dentista não encontrado' });
 
-        const isMatch = await bcrypt.compare(password, dentist.password);
+        const isMatch = await bcrypt.compare(password, dentist.senha!);
         if (!isMatch) return res.status(401).json({ error: 'Senha incorreta' });
 
         const token = jwt.sign({ id: dentist.id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
@@ -21,7 +21,7 @@ export const loginDentist = async (req: Request, res: Response) => {
             token, 
             user: { 
                 id: dentist.id, 
-                name: dentist.name 
+                name: dentist.nome 
             } 
         });
 
@@ -65,9 +65,8 @@ export const createDentist = async (req: Request, res: Response) => {
         const dentist = await prisma.dentist.create({
             data: {
                 email,
-                password: hashedPassword,
-                name,
-                specialty
+                senha: hashedPassword,
+                nome: name  
             }
         });
         res.status(201).json({ id: dentist.id, email: dentist.email });
