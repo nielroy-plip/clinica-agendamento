@@ -17,7 +17,8 @@ import {
   updateAppointmentSchema,
   appointmentStatusSchema} from '../validations/appointment.schema';
 import { appointmentQuerySchema } from '../validations/appointment.schema';
-import { appointmentSchemaType } from '../types/appointment'
+import { appointmentSchemaType } from '../types/appointment';
+import { authenticate } from '../middlewares/auth.middleware';
 
 const router = Router();
 
@@ -49,5 +50,9 @@ router.get('/date/:date', getAppointmentsByDate);
 
 //middleware de validação
 router.post('/', validate(appointmentSchemaType, 'body'), createAppointment)
+
+// rota de autenticação
+router.post('/', authenticate, createAppointment);
+router.get('/', authenticate, getAppointments);
 
 export default router;

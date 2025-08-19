@@ -33,6 +33,7 @@ model Patient {
   cpf            String?   @unique @db.VarChar(14)
   telefone       String    @db.VarChar(20)
   email          String?   @db.VarChar(100)
+  senha          String?   @db.VarChar(255)
   dataNascimento DateTime?
   endereco       String?   @db.VarChar(200)
   observacoes    String?   @db.Text

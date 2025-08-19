@@ -10,7 +10,10 @@ import {
   getAppointmentsByDate as getAppointmentsByDateService,
   updateAppointmentStatus as updateAppointmentStatusService
 } from '../services/appointment.service';
-import { AppointmentInput } from '../types/appointment'
+import { AppointmentInput } from '../types/appointment';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const create = async (req: Request, res: Response) => {
   const { body } = req as { body: AppointmentInput[] };
