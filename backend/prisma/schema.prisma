@@ -14,7 +14,7 @@ model Dentist {
   email     String   @unique @db.VarChar(100)
   senha     String   @db.VarChar(255)
   telefone  String?  @db.VarChar(20)
-  role      String   @default("RECEPCIONISTA") @db.VarChar(50)
+  role      String   @default("") @db.VarChar(50)
   ativo     Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -23,7 +23,7 @@ model Dentist {
   agendamentos     Appointment[]  @relation("DentistaAgendamentos")
   horariosTrabalho WorkingHours[]
 
-  @@map("users")
+  @@map("Dentist")
 }
 
 // modelo de pacientes

@@ -58,7 +58,7 @@ export const loginPatient = async (req: Request, res: Response) => {
 };
 
 export const createDentist = async (req: Request, res: Response) => {
-    const { email, password, name, specialty } = req.body;
+    const { email, password, name } = req.body;
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);

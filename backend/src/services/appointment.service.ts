@@ -52,7 +52,7 @@ export const createAppointment = async (data: CreateAppointmentData ) => {
     }
 
     // Validar se dentista existe
-    const dentist = await prisma.user.findUnique({
+    const dentist = await prisma.dentist.findUnique({
       where: { id: data.dentistaId }
     });
     if (!dentist) {

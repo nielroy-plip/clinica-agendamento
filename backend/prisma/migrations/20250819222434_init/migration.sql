@@ -1,0 +1,20 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- AlterTable
+ALTER TABLE [dbo].[Dentist] DROP CONSTRAINT [Dentist_role_df];
+ALTER TABLE [dbo].[Dentist] ADD CONSTRAINT [Dentist_role_df] DEFAULT '' FOR [role];
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH
