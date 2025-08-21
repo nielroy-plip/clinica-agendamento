@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// modelo de usuários do sistema
+// modelo de dentista do sistema
 model Dentist {
   id        Int      @id @default(autoincrement())
   nome      String   @db.VarChar(100)
