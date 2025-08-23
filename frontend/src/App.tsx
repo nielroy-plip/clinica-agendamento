@@ -1,21 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Booking from './pages/Booking';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import PatientDashboard from './pages/PatientDashboard';
-import DentistDashboard from './pages/DentistDashboard';
+import { AuthContext } from '../contexts/AuthContext';
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
+import Home from '../pages/Home';
+import About from '../pages/About';
+import Services from '../pages/Services';
+import Booking from '../pages/Booking';
+import Contact from '../pages/Contact';
+import Login from '../pages/Login';
+import PatientDashboard from '../pages/PatientDashboard';
+import DentistDashboard from '../pages/DentistDashboard';
 import './styles/globals.css';
 
 function App() {
   return (
-    <AuthProvider>
+    <AuthContext>
       <Router>
         <div className="min-h-screen bg-gray-50">
           <Header />
@@ -34,7 +34,7 @@ function App() {
           <Footer />
         </div>
       </Router>
-    </AuthProvider>
+    </AuthContext>
   );
 }
 

@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
       const { token, user: userData } = response.data;
       localStorage.setItem('token', token);
-      setUser(userSata);
+      setUser(userData);
 
       //configurar o token para todas as requisições
       api.defaults.headers.Authorization = `Bearer ${token}`;
