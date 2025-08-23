@@ -1,0 +1,84 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .nav-item {
+    @apply text-gray-600 hover:text-primary transition-colors cursor-pointer;
+  }
+  
+  .nav-item.active {
+    @apply text-primary font-semibold;
+  }
+  
+  .card {
+    @apply transition-transform duration-300 shadow-lg;
+  }
+  
+  .card:hover {
+    @apply transform -translate-y-1 shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary-dark text-white font-semibold transition-all duration-300;
+  }
+  
+  .btn-primary:hover {
+    @apply transform -translate-y-0.5 shadow-lg;
+  }
+  
+  .dashboard-card {
+    @apply bg-gradient-to-r from-gray-50 to-white border-l-4 border-primary rounded-r-lg;
+  }
+  
+  .status-paid {
+    @apply text-green-600;
+  }
+  
+  .status-pending {
+    @apply text-yellow-600;
+  }
+  
+  .status-overdue {
+    @apply text-red-600;
+  }
+  
+  .stock-low {
+    @apply bg-red-50 text-red-700;
+  }
+  
+  .stock-ok {
+    @apply bg-green-50 text-green-700;
+  }
+}
+
+/* WhatsApp Float Button */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
