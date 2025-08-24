@@ -1,15 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Hero from '../components/Sections/Hero';
-import Services from '../components/Sections/Services';
-import WhatsAppFloat from '../components/UI/WhatsAppFloat';
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
-    <div>
-      <Hero />
-      <Services />
-      <WhatsAppFloat />
+    <div className="home">
+      <h1>Welcome to Our Dental Clinic</h1>
+      <p>Quality dental care for the whole family</p>
     </div>
   );
 };

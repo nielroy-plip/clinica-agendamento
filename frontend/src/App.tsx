@@ -13,11 +13,11 @@ import PatientDashboard from '../pages/PatientDashboard';
 import DentistDashboard from '../pages/DentistDashboard';
 import './styles/globals.css';
 
-function App() {
+function App: React.FC = () => {
   return (
     <AuthContext>
       <Router>
-        <div className="min-h-screen bg-gray-50">
+        <div className="App">
           <Header />
           <main>
             <Routes>

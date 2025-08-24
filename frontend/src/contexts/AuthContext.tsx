@@ -1,71 +1,54 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import api from '../services/api';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-const AuthContext = createContext();
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'patient' | 'dentist';
+}
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used whitin an AuthProvider');
-  }
-  return context;
-};
+interface AuthContextType {
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+  isAuthenticated: boolean;
+}
 
-export const AuthProvider = ({ children }) => {
-  const [use, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      //verificar se o token é válido
-      api.defaults.headers.Authorization = `Bearer ${token}`;
-      // adicionar uma verificação de token com o backend
-      setLoading(false);
-    } else {
-      setLoading(false);
-    }
-  }, []);
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-  const login = async (email, password, isDentist = false) => {
-    try {
-      const endpoint = isDentist ? '/auth/dentist/login' : '/auth/patient/login';
-      const response = await api.post(endpoint, { email, password });
+export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
+  const [user, setUser] = useState<User | null>(null);
 
-      const { token, user: userData } = response.data;
-      localStorage.setItem('token', token);
-      setUser(userData);
-
-      //configurar o token para todas as requisições
-      api.defaults.headers.Authorization = `Bearer ${token}`;
-
-      return { success: true };
-    } catch (error) {
-      return {
-        success: false,
-        message: error.response?.data?.error || 'Erro ao fazer login'
-      };
-    }
+  const login = async (email: string, password: string) => {
+    //lógica para o login
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
     setUser(null);
-    delete api.defaults.headers.Authorization;
   };
 
-  const value = {
+  const value: AuthContextType = {
     user,
     login,
     logout,
-    loading
+    isAuthenticated: !!user
   };
 
   return (
     <AuthContext.Provider value={value}>
       {children}
-      </AuthContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-export default AuthContext;
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used whithin an AuthProvider');
+  }
+  return context;
+};
