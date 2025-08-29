@@ -3,7 +3,8 @@ import Home from "./pages/Home.tsx";
 import Agendamentos from "./pages/Agendamentos.tsx";
 import Contato from "./pages/Contato.tsx";
 import Login from "./pages/Login.tsx";
-import Sobre from './pages/Sobre.tsx'
+import Sobre from './pages/Sobre.tsx';
+import Servicos from './pages/Servicos.tsx'
 import Navbar from "./components/Navbar";
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/agendamentos" element={<Agendamentos />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/servicos" element={<Servicos />} />
           </Routes>
         </main>
       </div>
