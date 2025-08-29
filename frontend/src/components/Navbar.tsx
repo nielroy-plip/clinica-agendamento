@@ -21,12 +21,12 @@ const Navbar: React.FC = () => {
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">I</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">Inovatra</span>
-          </Link>
+            <h1 className="text-xl font-bold text-gray-900">Smylink</h1>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
