@@ -49,10 +49,9 @@ router.get('/patient/:patientId', getAppointmentsByPatient);
 router.get('/date/:date', getAppointmentsByDate);
 
 //middleware de validação
-router.post('/', validate(appointmentSchemaType, 'body'), createAppointment)
+router.post('/', validate(appointmentSchema, 'body'), authenticate, createAppointment);
 
 // rota de autenticação
-router.post('/', authenticate, createAppointment);
 router.get('/', authenticate, getAppointments);
 
 export default router;

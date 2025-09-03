@@ -7,7 +7,7 @@ const authRoutes = Router();
 authRoutes.post('/auth/dentist/login', loginDentist);
 
 // login para pacientes
-authRoutes.post('/aut/patient/login', loginPatient);
+authRoutes.post('/auth/patient/login', loginPatient);
 
 // teste ciração de dentista
 authRoutes.post('/auth/dentist/register', createDentist);

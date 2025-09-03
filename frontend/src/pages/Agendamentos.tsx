@@ -44,7 +44,7 @@ interface Profissional {
   name: string;
   specialty: string;
   description: string;
-  avaliable: boolean;
+  available: boolean;
 }
 
 const Agendamento: React.FC = () => {
@@ -100,23 +100,23 @@ const Agendamento: React.FC = () => {
     }
   ];
 
-  const profissionais: Profissional[] = {
+  const profissionais: Profissional[] = [
     {
-      id: 'dr-carlos',
+      id: '1',
       name: 'Dr. Carlos Silva',
       specialty: 'Diretor Clínico',
       description: 'Especialista em Implantodontia e Prótese',
       available: true
     },
     {
-      id: 'dra-ana',
+      id: '2',
       name: 'Dra. Ana Costa',
       specialty: 'Ortodontista',
       description: 'Especialista em Ortodontia e Ortopedia Facial',
       available: true
     },
     {
-      id: 'dr-pedro',
+      id: '3',
       name: 'Dr. Pedro Santos',
       specialty: 'Endodontista',
       description: 'Especialista em Endodontia e Clínica Geral',
@@ -224,15 +224,15 @@ const Agendamento: React.FC = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Data:</span>
-                  <span className="font-medium">{new Date(agendamentoData.data).toLocaleDateString('pt-BR')}</span>
+                  <span className="font-medium">{agendamentoData.data ? new Date(agendamentoData.data).toLocaleDateString('pt-BR') : '-'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Horário:</span>
-                  <span className="font-medium">{agendamentoData.horario}</span>
+                  <span className="font-medium">{agendamentoData.horario || '-'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Paciente:</span>
-                  <span className="font-medium">{agendamentoData.pacienteInfo.nome}</span>
+                  <span className="font-medium">{agendamentoData.pacienteInfo?.nome || '-'}</span>
                 </div>
               </div>
             </div>
@@ -605,6 +605,6 @@ const Agendamento: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Agendamento;

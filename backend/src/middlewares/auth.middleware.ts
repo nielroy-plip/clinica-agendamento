@@ -14,7 +14,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
   if (!token) return res.status(401).send('Acesso negado');
 
   try {
-    const decoded = jwt.verify(token, 'SEGREDO_SUPER_SECRETO') as { id: number };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: number };
     req.user = decoded;
     next();
   } catch (error) {
